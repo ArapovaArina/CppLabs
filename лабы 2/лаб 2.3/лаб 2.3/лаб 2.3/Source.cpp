@@ -3,11 +3,9 @@ using namespace std;
 int main()
 {
 	setlocale(0, "");
-	cout << "Введите количество чисел: ";
-	int n;
+	cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ	int n;
 	cin >> n;
-	cout << "Введите массив: \n";
-	int *a = new int[n + 1];
+	cout << "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 	int *a = new int[n + 1];
 	bool check = 1;
 	int p;
 	cin >> a[0];
