@@ -4,13 +4,13 @@ using namespace std;
 int main()
 {
 	int n; 
-	cout << "Ââåäèòå êîëè÷åñòâî ÷èñåë: ";
+	cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ ĞºĞ¾Ğ»Ğ¸Ñ‡ĞµÑÑ‚Ğ²Ğ¾ Ñ‡Ğ¸ÑĞµĞ»: ";
 	cin >> n; 
 
 	int *a = new int[n]; 
 	
 	for (int i = 0; i < n; i++) 
-	{ cout << "Ââåäèòå ìàññèâ: \n";
+	{ cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ Ğ¼Ğ°ÑÑĞ¸Ğ²: \n";
 		cin >> a[i];  }
 	int sum = 0;
 	for (int i = 0; i<n; i++)
@@ -18,7 +18,7 @@ int main()
 
 	for (int i = 0; i<n; i++)
 		b[i] = (sum - a[i]) / (n - 1);
-	cout »; " " b;
+	cout Â»; " " b;
 	
 	return 0;
 }
