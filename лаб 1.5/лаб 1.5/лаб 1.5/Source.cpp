@@ -1,9 +1,9 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<cmath>
 using namespace std;
 int main() {
 	setlocale(0, "");
-	cout << "ââåäèòå íàòóðàëüíîå ÷èñëî n = ";
+	cout << "Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð°Ñ‚ÑƒÑ€Ð°Ð»ÑŒÐ½Ð¾Ðµ Ñ‡Ð¸ÑÐ»Ð¾ n = ";
 	int n;
 	cin >> n;
 	int i;
