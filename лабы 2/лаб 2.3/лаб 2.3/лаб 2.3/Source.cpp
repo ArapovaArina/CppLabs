@@ -3,10 +3,17 @@ using namespace std;
 int main()
 {
 	setlocale(0, "");
+<<<<<<< HEAD
 	cout << "Ââåäèòå êîëè÷åñòâî ÷èñåë : ";
 	int n;
 	cin >> n;
 	cout << "Ââåäèòå ìàññèâ : \n";
+=======
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ‡Ð¸ÑÐµÐ»: ";	
+	int n;
+	cin >> n;
+	cout <<  "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¼Ð°ÑÑÐ¸Ð²: \n"; 	
+>>>>>>> master
 	int *a = new int[n + 1];
 	bool check = 1;
 	int p;

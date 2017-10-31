@@ -5,10 +5,10 @@ using namespace std;
 int main()
 {
 	setlocale(0, "");
-	cout << "Ââåäèòå êîëè÷åñòâî ÷èñåë â ìàññèâå: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ‡Ð¸ÑÐµÐ»: ";
 	int n;
 	cin >> n;
-	cout << "Ââåäèòå ìàññèâ: \n";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¼Ð°ÑÑÐ¸Ð²: \n";
 	int *a = new int[n]; 
 	int max = 0;
 	for (int i = 0; i < n; i++)

@@ -1,16 +1,16 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <math.h>
 using namespace std;
 int main()
 {
 	int n; 
-	cout << "Ââåäèòå êîëè÷åñòâî ÷èñåë: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ‡Ð¸ÑÐµÐ»: ";
 	cin >> n; 
 
 	int *a = new int[n]; 
 	
 	for (int i = 0; i < n; i++) 
-	{ cout << "Ââåäèòå ìàññèâ: \n";
+	{ cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¼Ð°ÑÑÐ¸Ð²: \n";
 		cin >> a[i];  }
 	int sum = 0;
 	for (int i = 0; i<n; i++)
@@ -18,7 +18,7 @@ int main()
 
 	for (int i = 0; i<n; i++)
 		b[i] = (sum - a[i]) / (n - 1);
-	cout »; " " b;
+	cout Â»; " " b;
 	
 	return 0;
 }
