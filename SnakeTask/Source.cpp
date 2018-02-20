@@ -353,3 +353,154 @@ int main() {
 //	}
 //	return 0;
 //}﻿
+#include<iostream>
+#include<conio.h> // to track keyboard input without closing
+#include <windows.h>
+
+
+
+using namespace std;
+
+bool gameOver;
+const int height = 20;
+const int width = 20;// ширина !!
+int x, y, fruitX, fruitY, score;
+enum motion { STOP = 0, LEFT, RIGHT, UP, DOWN };
+motion whereINeedToGo;
+
+
+
+
+void Setup() {
+	gameOver = false;
+	whereINeedToGo = STOP;
+	x = width / 2;
+	y = height / 2;
+	fruitX = rand() % height;
+	fruitY = rand() % width;
+	score = 0;
+	char key = 'y';
+
+}
+
+void Draw() {
+	system("cls"); //terminal cleaning, but for LINUX : system("clear");
+	cout << "SCORE : " << score << endl;
+
+	for (int i = 0; i < width + 2; i++)
+		cout << "*";
+	cout << endl;
+
+
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
+			if (j == 0)
+				cout << "*";
+			if (i == y && j == x) // create our snake
+				cout << "$";
+			else if
+				(i == fruitY && j == fruitY) // create our fruit
+				cout << "o";
+			else
+				cout << " ";
+
+
+			if (j == width - 1)
+				cout << "*";
+		}
+		cout << endl;
+	}
+
+	for (int i = 0; i < width + 2; i++)
+		cout << "*";
+	cout << endl;
+	Sleep(50);
+
+}
+
+void Input() {
+	if (_kbhit()) //it works if something was pressed :)
+	{
+		switch (_getch()) // read what was pressed
+		{
+		case 'a':
+			whereINeedToGo = LEFT;
+			break;
+		case 'd':
+			whereINeedToGo = RIGHT;
+			break;
+		case 'w':
+			whereINeedToGo = UP;
+			break;
+		case 's':
+			whereINeedToGo = DOWN;
+			break;
+		case 'x':
+			gameOver = true;
+			break;
+		}
+	}
+
+}
+
+void Logic() {
+
+	switch (whereINeedToGo)
+	{
+	case LEFT:
+		x--;
+		break;
+	case RIGHT:
+		x++;
+		break;
+	case UP:
+		y--;
+		break;
+	case DOWN:
+		y++;
+		break;
+	default:
+		break;
+	}
+	if (x > width || x < 0 || y > height || y < 0)
+		gameOver = true;
+	if (x == fruitX && y == fruitY) {
+		score += 100;
+		fruitX = rand() % height;
+		fruitY = rand() % width;
+
+	}
+
+}
+
+int main() {
+	Setup();
+	char *name = new char[255];
+	cout << " enter your name ";
+	cin >> name;
+
+	char key = 'y';
+	while (key != 'n')
+	{
+
+		while (!gameOver) {
+
+			Draw();
+			Input();
+			Logic();
+
+		}
+		cout << "Add another  [Y/n] ";
+		key = _getch();
+		Setup();
+
+
+
+	}
+
+
+
+
+
+	return 0;
+}
