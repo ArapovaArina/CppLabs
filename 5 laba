@@ -1,0 +1,287 @@
+
+#include<iostream>
+#include <math.h>
+#include <conio.h>
+using namespace std;
+
+class Circle
+{
+public :
+	double radius, centreX, centreY;
+
+	Circle()
+	{
+		radius = 0.0;
+		centreX = 0.0;
+		centreY = 0.0;
+	}
+
+	void Input(double radiuss, double centreXX, double centreYY)
+	{
+		radius = radiuss;
+		centreX = centreXX;
+		centreY = centreYY;
+	}
+
+
+	void Move()
+	{
+		double moveX, moveY;
+		cout << "Введите координаты смещения круга" << endl;
+		cout << " по ОХ :     ";
+		cin >> moveX;
+		cout << " по ОY :     ";
+		cin >> moveY;
+		centreX = centreX + moveX;
+		centreY = centreY + moveY;
+	}
+
+	void Size() 
+	{
+		double K1;
+		cout << "Введите коэффициент изменения радиуса круга" << endl;
+		cin >> K1;
+		radius = radius * K1;
+	}
+
+	
+};
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+
+class Square 
+{
+public :
+	double X1, Y1, CX, CY, storonaKvadrata;
+
+	Square()
+	{
+		X1 = 0.0;
+		Y1 = 0.0;
+		CX = 0.0;
+		CY = 0.0;
+		storonaKvadrata = 0.0;
+	}
+
+	void Input(double XX1, double YY1, double CCX, double CCY)
+	{
+		X1 = XX1;
+		Y1 = YY1;
+		CX = CCX;
+		CY = CCY;
+		storonaKvadrata = sqrt(pow(X1 - CX, 2) + pow(X1 - CY, 2)) * 2 / sqrt(2);
+
+	}
+
+
+
+	void Move() 
+	{
+		double moveX, moveY;
+		cout << "Введите координаты смещения квадрата " << endl;
+		cout << " по ОХ :     ";
+		cin >> moveX;
+		cout << " по ОY :     ";
+		cin >> moveY;
+		CX = CX + moveX;
+		CY = CY + moveY;
+		X1 = X1 + moveX;
+		Y1 = Y1 + moveY;
+	}
+
+	void Size()
+	{
+		double K2;
+		cin >> K2;
+		X1 = X1 * K2;
+		Y1 = Y1 * K2;
+		storonaKvadrata = storonaKvadrata * K2;
+	}
+	
+};
+
+
+
+
+///////////////////////////////////////////////////////////////////////////
+
+void Inp(Circle &obj1, Square &obj2)
+{
+	cout << endl;
+	double radiuss, centreXX, centreYY;
+	cout << "          СОЗДАЕМ КРУГ" << endl << "          Введите центр круа : " << endl << "OX : ";
+	cin >> centreXX;
+	cout << "OY : ";
+	cin >> centreYY;
+	cout << "Введите радиус : ";
+	cin >> radiuss;
+	obj1.Input(radiuss, centreXX, centreYY);
+
+
+	cout << endl << endl;
+
+	double XX1, YY1, CCX, CCY;
+
+	cout << "          СОЗДАЕМ КВАДРАТ " << endl << "          Введите центр квадрата" << endl << "OX : ";
+	cin >> CCX;
+	cout << "OY : ";
+	cin >> CCY;
+	cout << "Введите одну из вершин : " << endl << "OX : ";
+	cin >> XX1;
+	cout << "OY : ";
+	cin >> YY1;
+	obj2.Input(XX1, YY1, CCX, CCY);
+
+	cout << endl;
+}
+
+int main() 
+{
+	setlocale(LC_ALL, "Russian");
+	Circle obj1;
+	Square obj2;
+	while (true)
+	{
+		cout << endl << "____________________________________________________________" << endl;
+		cout << "0 - создать фигуры" << endl;
+		cout << "1 - вывести на экран все сведения о фигурах" << endl;
+		cout << "2 - изменить размер фигур" << endl;
+		cout << "3 - перемещение фигур" << endl;
+		cout << "4 - пересечение фигур" << endl;
+		cout << "5 - выйти из программы" << endl;
+		cout << "____________________________________________________________" << endl;
+
+		switch (_getch())
+		{
+
+		case '0':
+		{
+			Inp(obj1, obj2);
+			break;
+		}
+
+
+
+		case '1':
+		{
+			cout << endl << endl << "Сведения о какой фигуре вы хотите узнать ?" << endl << "1 - о круге" << endl << "2 - о квадрате" << endl << "3 - выйти" << endl << endl << endl;
+
+			switch (_getch())
+			{
+			case'1':
+			{
+				cout << "Центр круга :" << endl << "OX : " << obj1.centreX << endl << "OY : " << obj1.centreY << endl << "Радиус круга : " << obj1.radius << endl;
+				break;
+			}
+			case'2':
+			{
+				cout << "Центр квадрата :" << endl << "OX : " << obj2.CX << endl << "OY : " << obj2.CX << endl << "Одна из вершин квадрата" << endl << "OX : " << obj2.X1 << endl << "OY : " << obj2.Y1 << endl << "Сторона квадрата : " << obj2.storonaKvadrata << endl;
+				break;
+			}
+			case '3':
+			{
+				break;
+
+			}
+
+			}
+
+
+
+			break;
+		}
+
+
+
+		case '2':
+		{
+			cout << endl << endl << "Pазмеры какой фигуры вы хотите изменить ? " << endl << "1 - круга" << endl << "2 - квадрата"<< endl << "3 - выйти" << endl << endl << endl;
+			switch (_getch())
+			{
+			case '1':
+			{
+				obj1.Size();
+			
+				break;
+			}
+			case '2':
+			{
+				obj2.Size();
+
+				break;
+			}
+
+			case '3':
+			{
+				break;
+			}
+
+			     }
+			break;
+		}
+
+
+
+
+		case '3':
+		{
+			cout << endl << endl << "Какую фигуру вы хотете переместить ?" << endl << "1 - круг" << endl << "2 - квадрат" << endl <<"3 - выйти" << endl << endl << endl;
+			switch (_getch())
+			{
+			case'1':
+			{
+				obj1.Move();
+				break;
+			}
+			case'2':
+			{
+				obj2.Move();
+				break;
+			}
+			case'3':
+			{
+				break;
+			}
+			}
+			break;
+		                  }
+
+
+
+
+		case '4':
+		{
+			
+			double prom = sqrt(pow(obj1.centreX - obj2.CX, 2) + pow(obj1.centreY - obj2.CY, 2));
+
+			if (prom <= obj1.radius)
+				cout << " ФИГУРЫ ПЕРЕСЕКАЮТСЯ !" << endl << endl << endl;
+			else
+				cout << "ФИГУРЫ НЕ ПЕРЕСЕКАЮТСЯ !" << endl << endl << endl;
+			break;
+		}
+
+
+
+
+		case '5':
+		{
+			
+			return 0;
+		}
+
+
+		}// закрывает switch !
+
+
+
+
+	}//конец вайла
+
+
+
+	system("pause");
+
+}
