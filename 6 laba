@@ -1,0 +1,139 @@
+#include<iostream>
+#include <math.h>
+#include <conio.h>
+
+using namespace std;
+
+
+class Complex
+{
+private: 
+	int real, imaginary;
+public:
+	Complex()
+	{
+		
+		this->real = 0;	
+		this->imaginary = 0;
+	}
+
+	Complex(const Complex &other)
+	{
+		this->real = other.real;
+		this->imaginary = other.imaginary;
+	
+	}
+
+	Complex & operator = (const Complex &other)
+	{
+		this->real = other.real;
+		this->imaginary = other.imaginary;
+		return *this;
+	}
+
+	void Get()
+	{
+		int a, b;
+		cout << "Введите целую часть : ";
+		cin >> a;
+        cout << "Введите мнимую часть : ";
+		cin >> b;
+		this->real = a;
+		this->imaginary = b;
+	}
+
+	Complex operator + (const Complex &other)
+	{
+		Complex temp;
+		temp.real = this->real + other.real;
+		temp.imaginary = this->imaginary + other.imaginary;
+		return temp;
+	}
+
+	Complex operator - (const Complex &other)
+	{
+		Complex temp;
+		temp.real = this->real - other.real;
+		temp.imaginary = this->imaginary - other.imaginary;
+		return temp;
+	}
+
+	Complex operator * (const Complex &other)
+	{
+		Complex temp;
+		temp.real = this->real * other.real - this->imaginary * other.imaginary;
+		temp.imaginary = this->real * other.imaginary + this->imaginary * other.real;
+		return temp;
+
+	}
+
+	void Cout()
+	{
+		cout << endl << endl << "Ответ : " << this->real <<" + i * ( " << this->imaginary << " )" << endl;
+	}
+
+};
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+    Complex x,y,z;	
+
+while (true)
+{
+	cout << "Какую операцию вы хотите выполнить?                                                            " << endl;
+	cout << " ____________________________________________ " << endl;
+	cout << "1.Создание комплексных чисел" << endl;
+	cout << "2.Сложение комплексных чисел" << endl;
+	cout << "3.Вычитание комплексных чисел" << endl;
+	cout << "4.Умножение комплексных чисел" << endl;
+	cout << "5.Выход" << endl;
+	cout << " ____________________________________________ " << endl;
+
+	switch (_getch())
+	{
+	case '1':
+	{
+		cout << "Первое число." << endl;
+		x.Get();
+		cout << endl;
+		cout << "Второе число." << endl;
+		y.Get();
+		break;
+	}
+	
+	case '2':
+	{
+		z = x + y;
+		z.Cout();
+		break;
+	}
+	 
+	case '3':
+	{
+		z = x - y;
+		z.Cout();
+		break;
+	}
+
+	case '4':
+	{
+		z = x * y;
+		z.Cout();
+		break;
+	}
+
+	case '5':
+	{
+		return 0;
+	}
+
+
+	}//конец свича
+
+}// выход из вайла
+
+
+	system("pause");
+	
+}
