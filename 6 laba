@@ -8,13 +8,13 @@ using namespace std;
 class Complex
 {
 private: 
-	int real, imaginary;
+	double real, imaginary;
 public:
 	Complex()
 	{
 		
-		this->real = 0;	
-		this->imaginary = 0;
+		this->real = 0.0;	
+		this->imaginary = 0.0;
 	}
 
 	Complex(const Complex &other)
@@ -33,7 +33,7 @@ public:
 
 	void Get()
 	{
-		int a, b;
+		double a, b;
 		cout << "Введите целую часть : ";
 		cin >> a;
         cout << "Введите мнимую часть : ";
