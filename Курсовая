@@ -1,0 +1,33 @@
+#include<iostream>
+
+using namespace std;
+
+template<class T>
+class Temp
+{
+private:
+	T value;
+public:
+
+
+};
+
+
+
+
+
+
+int main()
+{
+
+
+
+
+
+
+
+
+
+	system("pause");
+	return 0;
+}
