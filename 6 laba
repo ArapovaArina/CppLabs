@@ -7,9 +7,9 @@ using namespace std;
 
 class Complex
 {
-private: 
-	double real, imaginary;
 public:
+	double real, imaginary;
+
 	Complex()
 	{
 		
@@ -17,14 +17,14 @@ public:
 		this->imaginary = 0.0;
 	}
 
-	Complex(const Complex &other)
+	Complex(const Complex &other) // копирование
 	{
 		this->real = other.real;
 		this->imaginary = other.imaginary;
 	
 	}
 
-	Complex & operator = (const Complex &other)
+	Complex & operator = (const Complex &other) // присваивание
 	{
 		this->real = other.real;
 		this->imaginary = other.imaginary;
@@ -67,13 +67,21 @@ public:
 
 	}
 
-	void Cout()
+	~Complex()
 	{
-		cout << endl << endl << "Ответ : " << this->real <<" + i * ( " << this->imaginary << " )" << endl;
+		cout << "Вызвался деструктор" << endl;
 	}
+	//void Cout()
+	//{
+	//	cout << endl << endl << "Ответ : " << this->real <<" + i * ( " << this->imaginary << " )" << endl;
+	//}
 
 };
 
+void lala( Complex &z)
+{
+	 cout << z.real << " + i * ( " <<z.imaginary << " )" << endl;
+};
 int main()
 {
 	setlocale(LC_ALL, "Russian");
@@ -105,21 +113,24 @@ while (true)
 	case '2':
 	{
 		z = x + y;
-		z.Cout();
+	/*	z.Cout();*/
+		lala(z);
 		break;
 	}
 	 
 	case '3':
 	{
 		z = x - y;
-		z.Cout();
+		/*z.Cout();*/
+		lala(z);
 		break;
 	}
 
 	case '4':
 	{
 		z = x * y;
-		z.Cout();
+		/*z.Cout();*/
+		lala(z);
 		break;
 	}
 
@@ -128,8 +139,14 @@ while (true)
 		return 0;
 	}
 
+	default:
+	{
+		cout << "Попробуйте еще раз." << endl;
+		break;
+	}
 
 	}//конец свича
+
 
 }// выход из вайла
 
