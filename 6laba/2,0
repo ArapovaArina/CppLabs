@@ -7,8 +7,11 @@ using namespace std;
 
 class Complex
 {
+private:
+double real, imaginary;
+
 public:
-	double real, imaginary;
+	
 
 	Complex()
 	{
