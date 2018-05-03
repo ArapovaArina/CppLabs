@@ -1,0 +1,99 @@
+#include<iostream>
+#include <windows.h>
+#include<cmath>
+#include <conio.h>
+
+using namespace std;
+
+
+struct Student
+{
+	char *name = new char[128];
+	char *surname = new char[128];
+	char *otchestvo = new char[128];
+	int group;
+	int marks[5];
+	double srednee = 0.0;
+};
+
+
+
+
+int main()
+{
+	setlocale(0, "");
+
+	Student *st = new Student[10];
+	int i = 0;
+	int a;
+	bool vopros = true;
+	while (i < 10)
+	{
+	
+			cout << "Хотите добавить студента ?[д/н]" << endl; // почему то работает switch только с англ раскладкой.
+			
+			switch (_getch())
+			{
+			case 'd':
+			{  			
+				cout << "Введите имя : ";
+			cin >> st[i].name;
+			cout << endl << "Введите фамилию : ";
+			cin >> st[i].surname;
+			cout << endl << "Введите отчество : ";
+			cin >> st[i].otchestvo;
+			cout << endl << "Введите номер группы : ";
+			cin >> st[i].group;
+			cout << "Введите оценки за 5 предметов : " << endl;
+			for (int k = 0; k < 5; k++)
+			{
+				cout << k+1 << " : ";
+				cin >> st[i].marks[k];
+				st[i].srednee += st[i].marks[k];
+			}
+			st[i].srednee /= 5;
+
+				i++; 
+				break;
+			}
+			case 'n':
+			{
+				vopros = false;
+				break; 
+			}
+			default:
+			{
+				cout << "Попробуйте еще раз" << endl;
+				break;
+			}
+          }//switch
+		
+			if (vopros == false ) break;
+
+}//while
+	for (int j = 0; j < i - 1; j++)
+	{
+		if (st[j].group > st[j + 1].group)
+			swap(st[j], st[j + 1]);
+	}
+
+
+
+	for (int p = 0; p < i; p++)
+	{
+		if (st[p].srednee > 4)
+		{
+			vopros = true;
+			cout <<"Имя : "<< st[p].name << " " << "Фамилия : " << st[p].surname << " " << "Отчество : " << st[p].otchestvo << " " << "Номер группы : " << st[p].group << " "<< "Оценки : ";
+			for (int j = 0; j < 5; j++)
+				cout << st[p].marks[j] << " ";
+			cout << endl;
+		}
+	}
+	if (vopros == false)
+		cout << "Нет студентов с баллом выше, чем 4.0";
+
+	system("pause");
+	return 0;
+
+}
