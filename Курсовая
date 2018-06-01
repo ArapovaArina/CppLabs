@@ -1,33 +1,92 @@
 #include<iostream>
+#include<string>
 
 using namespace std;
 
-template<class T>
-class Temp
+template<class TKey, class TValue>
+class MAP
 {
-private:
-	T value;
-public:
+private :
+	struct Collection
+	{
+		TKey key;
+		TValue value;
+	};
+
+	int size;  // длиннна всего массива
+	int len; // это текущий номер ячейки
+
+	Collection **array;
+
+	void Expansion() // расширение массив4ика
+	{
+		cout << "Extension ! " << endl;
+		tmp = size * 2;
+		Collection **tmpArray = new Collection*[tmp];
+		for (int i = 0; i < size; i++)
+		{
+			tmpArray[i] = array[i];
+		}
+		size *= 2;
+		array = tmpArray;
+		
+		// тут еще нужно удаление старого массива 
+		
+	}
+
+	
+
+public: 
+	MAP()
+	{
+		len = 0;
+		size = 5;
+		array = new Collection*[size];
+	}
+
+    TKey returnKey()
+	{
+		return TKey;
+	}
+
+	void Add(TKey, TValue)
+	{
+		if (len == size)
+		{
+			cout << "I call an extension !" << endl;
+			Expansion(); 
+			Collection *array = new Collection;
+			array->TKey = TKey;
+			array->TValue = TValue;
+			array[len++] = array;
+		}
+
+		array->TKey = TKey;
+		array->TValue = TValue;
+		array[len++] = array;
+	}
 
 
+
+
+	void Show()
+	{
+		cout << returnKey
+	}
+
+~MAP();
 };
-
-
 
 
 
 
 int main()
 {
-
-
-
-
-
-
-
+	cout << "Welcome ! " << endl;
+	//MAP<int, int> MY;
 
 
 	system("pause");
 	return 0;
 }
+
