@@ -3,6 +3,8 @@
 
 #include<iostream>
 #include<string>
+#include <conio.h>
+#pragma warning(disable : 4996)
 
 using namespace std;
 
@@ -112,28 +114,52 @@ public:
 
 };
 
-class point
+class Book
 {
 private:
-	int x;
-	int y;
+	char *name;
+	int year;
+	int exemp;
 public:
-	point()
+	Book()
 	{
-		x = y = 0;
+		name = "No name";
+		year = 0;
+		exemp = 0;
 	}
 
-	point(int x, int y)
+	Book(char* name, int year, int exemp)
 	{
-		this->x = x;
-		this->y = y;
+		this->name = name;
+		this->year = year;
+		this->exemp = exemp;
 	}
-	friend ostream &operator<<(ostream &out, point &p) // перегрузка вывода 
+	friend ostream &operator<<(ostream &out, Book &book) 
 	{
-		out << "x =  " << p.x << "  y = " << p.y <<  endl;
+		out << " The name of the book :  " <<book.name << endl << " year : " << book.year <<  endl;
 		return out;
 	}
 
+	friend Book &operator >> (istream& in, Book &book)
+	{
+		
+		int year;
+		char* name = new char[64];
+		cout << "Enter the name : ";
+		in >> name;
+		cout << "Enter the year : ";
+		in>> year;
+
+		book.name = name;
+		book.year = year;
+
+		return book;
+	}
+
+	//~Book()
+	//{
+	//	delete[]name;
+	//}
 };
 
 
@@ -141,21 +167,86 @@ public:
 int main()
 {
 	cout << "Welcome ! " << endl;
-	
 
-	point a(1, 2);
-	point b(3, 4);
 
-	  MAP<int, point> MY;
-	  MY.Add(12, a);
-	  MY.Add(34, b);
+	//char* name = new char[255];
+	//cin >> name;
+	//Book b;
+	//cin >> b;
+	//cout << a;
+	//string st1("PIZDEC ! \n");
+	//  MAP<string ,int> MY;
+	  //MY.Add(st1, 11);
+	  //MY.Add(13, b);
 
  //  MAP<char, int> MY;
 	//MY.Add('a', 5);
 	//MY.Add('s', 0);
 	//MY.Add('b', 0);
-	//MY.Del('a');
-	cout << MY;
+	//MY.Del(12);
+	//cout << MY;
+	MAP<string, Book> MY;
+	
+	
+	while (true)
+	{
+		cout << "What operation do you want to perform ? " << endl;
+		cout << " ____________________________________________ " << endl;
+		cout << "1.Add a book " << endl;
+		cout << "2.Delete the book by author's name" << endl;
+		cout << "3.Displaying books on the console" << endl;
+		cout << "4." << endl;
+		cout << "5.Exit" << endl;
+		cout << " ____________________________________________ " << endl;
+
+		switch (_getch())
+		{
+		case '1':
+		{   string Author;
+            Book NewBook;
+			cout << "Enter the author of the book : ";
+			cin >> Author;
+			cin >> NewBook;
+			MY.Add(Author, NewBook);
+			break;
+		}
+
+		case '2':
+		{
+			string Author;
+			cout << "Enter the author's name to delete his book : ";
+			cin >> Author;
+			MY.Del(Author);
+			break;
+		}
+
+		case '3':
+		{
+			cout << MY;
+			break;
+		}
+
+		case '4':
+		{
+			
+			break;
+		}
+
+		case '5':
+		{
+			return 0;
+		}
+
+		default:
+		{
+			cout << "Try again" << endl;
+			break;
+		}
+
+		}//конец свича
+
+
+	}// выход из вайла
 
 
 	system("pause");
