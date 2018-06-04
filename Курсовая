@@ -1,3 +1,6 @@
+//слайды у Boolякова со стр 87
+
+
 #include<iostream>
 #include<string>
 
@@ -16,74 +19,143 @@ private :
 	int size;  // длиннна всего массива
 	int len; // это текущий номер ячейки
 
-	Collection **array;
-
-	void Expansion() // расширение массив4ика
-	{
-		cout << "Extension ! " << endl;
-		tmp = size * 2;
-		Collection **tmpArray = new Collection*[tmp];
-		for (int i = 0; i < size; i++)
-		{
-			tmpArray[i] = array[i];
-		}
-		size *= 2;
-		array = tmpArray;
-		
-		// тут еще нужно удаление старого массива 
-		
-	}
-
-	
+	Collection *array;
 
 public: 
 	MAP()
 	{
 		len = 0;
 		size = 5;
-		array = new Collection*[size];
+		array = new Collection[size];
 	}
 
-    TKey returnKey()
+    void Expansion() 
 	{
-		return TKey;
-	}
+		cout << "Extension ! " << endl;
+		int temp;
+		temp = size * 2;
+		Collection *tempArray = new Collection[temp];
 
-	void Add(TKey, TValue)
+		for (int i = 0; i < len; i++)
+		{
+			tempArray[i] = array[i];
+		}
+	
+		array = tempArray;
+		size = temp;
+
+		// i also need to delete old array ( it`s a tempArray)
+	}
+	
+
+	void Add(TKey Nkey, TValue Nvalue)
 	{
 		if (len == size)
 		{
 			cout << "I call an extension !" << endl;
-			Expansion(); 
-			Collection *array = new Collection;
-			array->TKey = TKey;
-			array->TValue = TValue;
-			array[len++] = array;
+			Expansion();
+		
 		}
 
-		array->TKey = TKey;
-		array->TValue = TValue;
-		array[len++] = array;
+		cout << "Nothing" << endl;
+		array[len].key = Nkey;
+		array[len].value = Nvalue;
+		len++;
 	}
 
-
-
-
-	void Show()
+	void Del(TKey Nkey)
 	{
-		cout << returnKey
+		int index;
+		index = Search(Nkey);
+		for (int i = index; i < getLen(); i++)
+		{
+			array[i] = array[i + 1];
+		}
+		len--;
+
 	}
 
-~MAP();
+	int Search(TKey Nkey)
+	{
+		int i;
+		for ( i = 0; i < len; i++)
+		{
+			if (array[i].key == Nkey)
+				return i;
+		}
+	}
+
+	int getLen()
+	{
+		return len;
+    }
+
+	TKey getKey(int num)
+	{
+		return array[num].key;
+	}
+	
+	TValue& getValue(int num)
+	{
+		return array[num].value;
+	}
+
+	friend ostream& operator << (ostream& out,MAP& map)
+	{
+		for (int i = 0; i < map.getLen(); i++)
+		{
+			cout <<"this is a kay :  " <<map.getKey(i) << endl;
+			cout << "this is a value :  " << map.getValue(i) << endl;
+		}
+		return out;
+	}
+
 };
 
+class point
+{
+private:
+	int x;
+	int y;
+public:
+	point()
+	{
+		x = y = 0;
+	}
+
+	point(int x, int y)
+	{
+		this->x = x;
+		this->y = y;
+	}
+	friend ostream &operator<<(ostream &out, point &p) // перегрузка вывода 
+	{
+		out << "x =  " << p.x << "  y = " << p.y <<  endl;
+		return out;
+	}
+
+};
 
 
 
 int main()
 {
 	cout << "Welcome ! " << endl;
-	//MAP<int, int> MY;
+	
+
+	point a(1, 2);
+	point b(3, 4);
+
+	  MAP<int, point> MY;
+	  MY.Add(12, a);
+	  MY.Add(34, b);
+
+ //  MAP<char, int> MY;
+	//MY.Add('a', 5);
+	//MY.Add('s', 0);
+	//MY.Add('b', 0);
+	//MY.Del('a');
+	cout << MY;
 
 
 	system("pause");
