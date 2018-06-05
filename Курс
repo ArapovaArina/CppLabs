@@ -1,0 +1,249 @@
+#include<iostream>
+#include<string>
+#include <conio.h>
+#pragma warning(disable : 4996)
+
+using namespace std;
+
+template<class TKey, class TValue>
+class MAP
+{
+private :
+	struct Collection
+	{
+		TKey key;
+		TValue value;
+	};
+
+	int size;  // длиннна всего массива
+	int len; // это текущий номер ячейки
+
+	Collection *array;
+
+public: 
+	MAP()
+	{
+		len = 0;
+		size = 5;
+		array = new Collection[size];
+	}
+
+    void Expansion() 
+	{
+		cout << "Extension ! " << endl;
+		int temp;
+		temp = size * 2;
+		Collection *tempArray = new Collection[temp];
+
+		for (int i = 0; i < len; i++)
+		{
+			tempArray[i] = array[i];
+		}
+	
+		array = tempArray;
+		size = temp;
+
+		// i also need to delete old array ( it`s a tempArray)
+	}
+	
+
+	void Add(TKey Nkey, TValue Nvalue)
+	{
+		if (len == size)
+		{
+			cout << "I call an extension !" << endl;
+			Expansion();
+		
+		}
+
+		cout << "Nothing" << endl;
+		array[len].key = Nkey;
+		array[len].value = Nvalue;
+		len++;
+	}
+
+	void Del(TKey Nkey)
+	{
+		int index;
+		index = Search(Nkey);
+		for (int i = index; i < getLen(); i++)
+		{
+			array[i] = array[i + 1];
+		}
+		len--;
+
+	}
+
+	void Sort()
+	{
+		
+		for (int i = 0; i < len - 1; i++) {
+			for (int j = 0; j < len - i - 1; j++) {
+				if (array[j].key > array[j + 1].key) {
+					swap(array[j].key, array[j + 1].key);
+				}
+			}
+		}
+	}
+	
+	int Search(TKey Nkey)
+	{
+		int i;
+		for ( i = 0; i < len; i++)
+		{
+			if (array[i].key == Nkey)
+				return i;
+		}
+	}
+
+	int getLen()
+	{
+		return len;
+    }
+
+	TKey getKey(int num)
+	{
+		return array[num].key;
+	}
+	
+	TValue getValue(int num)
+	{
+		return array[num].value;
+	}
+
+	friend ostream& operator << (ostream& out,MAP& map)
+	{
+		for (int i = 0; i < map.getLen(); i++)
+		{
+			out <<"this is a kay :  " <<map.getKey(i) << endl;
+			out << "this is a value :  " << map.getValue(i) << endl;
+		}
+		return out;
+	}
+
+	friend istream& operator >> (istream& in, MAP& map)
+	{
+			TKey key;
+			TValue value;
+			in >> key;
+			in >> value;
+			map.Add(key, value);
+		
+		return in;
+	}
+
+
+};
+
+class Book
+{
+private:
+	char *name;
+	int year;
+	int exemp;
+public:
+	Book()
+	{
+		name = "No name";
+		year = 0;
+		exemp = 0;
+	}
+
+	Book(char* name, int year, int exemp)
+	{
+		this->name = name;
+		this->year = year;
+		this->exemp = exemp;
+	}
+	friend ostream &operator<<(ostream &out, Book &book) 
+	{
+		out << " The name of the book :  " <<book.name << endl << " year : " << book.year <<  endl;
+		return out;
+	}
+
+	friend istream& operator >> (istream& in, Book& book)
+	{
+		char *name = new char[256];
+		int year, exemp;
+		in >> name;
+		in >> year;
+		in >> exemp;
+		return in;
+	}
+	
+
+	//~Book()
+	//{
+	//	delete[]name;
+	//}
+};
+
+
+
+int main()
+{
+	cout << "Welcome ! " << endl;
+
+	MAP<string, Book> MY;
+	while (true)
+	{
+		cout << "What operation do you want to perform ? " << endl;
+		cout << " ____________________________________________ " << endl;
+		cout << "1.Add a book " << endl;
+		cout << "2.Delete the book by author's name" << endl;
+		cout << "3.Displaying books on the console" << endl;
+		cout << "4." << endl;
+		cout << "5.Exit" << endl;
+		cout << " ____________________________________________ " << endl;
+
+		switch (_getch())
+		{
+		case '1':
+		{  
+			cout << "You want to add a new book.Be careful!" << endl << "1.Enter author" << endl << "2.Book title" << endl << "3.The year of publishing" << endl << "4.Number of copies of this book" << endl;
+			cin >> MY;
+			break;
+		}
+
+		case '2':
+		{
+			string Author;
+			cout << "Enter the author's name to delete his book : ";
+			cin >> Author;
+			MY.Del(Author);
+			break;
+		}
+
+		case '3':
+		{
+			cout << MY;
+			break;
+		}
+
+		case '4':
+		{
+			MY.Sort();
+			break;
+		}
+
+		case '5':
+		{
+			return 0;
+		}
+
+		default:
+		{
+			cout << "Try again" << endl;
+			break;
+		}
+
+		}//конец свича
+
+
+	}// выход из вайла
+
+
+	system("pause");
+	return 0;
+}
+
