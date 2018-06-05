@@ -1,6 +1,7 @@
 #include<iostream>
 #include<string>
 #include <conio.h>
+#include<fstream>
 #pragma warning(disable : 4996)
 
 using namespace std;
@@ -40,10 +41,9 @@ public:
 			tempArray[i] = array[i];
 		}
 	
+		delete[]array;
 		array = tempArray;
 		size = temp;
-
-		// i also need to delete old array ( it`s a tempArray)
 	}
 	
 
@@ -138,7 +138,7 @@ public:
 class Book
 {
 private:
-	char *name;
+	char *name ;
 	int year;
 	int exemp;
 public:
@@ -155,6 +155,8 @@ public:
 		this->year = year;
 		this->exemp = exemp;
 	}
+
+
 	friend ostream &operator<<(ostream &out, Book &book) 
 	{
 		out << " The name of the book :  " <<book.name << endl << " year : " << book.year <<  endl;
@@ -163,11 +165,12 @@ public:
 
 	friend istream& operator >> (istream& in, Book& book)
 	{
-		char *name = new char[256];
-		int year, exemp;
+		char* name = new char[64];
 		in >> name;
-		in >> year;
-		in >> exemp;
+		book.name = name; //тут по отладке он не записывает значение
+		in >> book.year;
+		in >> book.exemp;
+		
 		return in;
 	}
 	
@@ -187,12 +190,12 @@ int main()
 	MAP<string, Book> MY;
 	while (true)
 	{
-		cout << "What operation do you want to perform ? " << endl;
+		cout << "What do you want to do ? " << endl;
 		cout << " ____________________________________________ " << endl;
 		cout << "1.Add a book " << endl;
 		cout << "2.Delete the book by author's name" << endl;
 		cout << "3.Displaying books on the console" << endl;
-		cout << "4." << endl;
+		cout << "4.Output to file" << endl;
 		cout << "5.Exit" << endl;
 		cout << " ____________________________________________ " << endl;
 
@@ -215,17 +218,23 @@ int main()
 		}
 
 		case '3':
-		{
+		{ 
+			cout << "The book list has been sorted." << endl;
+			MY.Sort();
 			cout << MY;
 			break;
 		}
 
 		case '4':
 		{
-			MY.Sort();
-			break;
+			ofstream File;
+			File.open("Book.txt", ios::trunc);
+			File << "----------------------------------------------------------------------------------------------------------------------" << endl;
+			File << "| Author                   | Book title             | The year of publishing         | Number of copies              |" << endl;
+			File << "----------------------------------------------------------------------------------------------------------------------" << endl;
+			File << MY;
+			return 0;
 		}
-
 		case '5':
 		{
 			return 0;
